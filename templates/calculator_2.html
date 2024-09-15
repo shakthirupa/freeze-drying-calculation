@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freeze Drying Calculator - Step 2</title>
+    <style>
+        /* Include your CSS styles */
+        body {
+            background-image: url('https://cdn11.bigcommerce.com/s-ay2mt0vs/images/stencil/original/carousel/155/banner__72643.jpg?c=2&imbypass=on');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #000000;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: rgb(9, 31, 131);
+        }
+        h5 {
+            color: #000;
+        }
+        input[type="number"] {
+            width: 10%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            color: #000;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #413bff;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #8cfbff;
+        }
+        input[type="submit"], .next-button {
+            padding: 10px 20px;
+            background-color: #413bff;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover, .next-button:hover {
+            background-color: #8cfbff;
+        }
+        .next-button {
+            margin-top: 20px;
+            background-color: #413bff; /* Green color for the Next button */
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            padding: 10px;
+            color: rgb(0, 0, 0);
+            width:10%;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .result-item {
+            margin: 10px 0;
+            color: #000;
+        }
+        .result-item span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Freeze Drying Calculation-2</h2>
+        <form id="calculateForm2" action="/calculate_2" method="POST">
+            <div class="form-group">
+                <label for="pressure">Enter Saturation Pressure (Pa):</label>
+                <input type="number" id="pressure" name="pressure" required>
+            </div>
+            <div class="form-group">
+                <label for="temperature">Enter Temperature (°C):</label>
+                <input type="number" id="temperature" name="temperature" required>
+            </div>
+            <div class="form-group">
+                <label for="condenser_temp">Enter Condenser Temperature (°C):</label>
+                <input type="number" id="condenser_temp" name="condenser_temp" required>
+            </div>
+            <input type="submit" value="Calculate">
+            <a href="indexi.html" class="next-button">Next</a>
+        </form>
+        <div id="results">
+            <!-- This is where the results will be displayed -->
+        </div>
+    </div>
+
+    <!-- Include your JavaScript to handle form submission and display results -->
+    <script>
+        document.getElementById('calculateForm2').onsubmit = function(e) {
+            e.preventDefault();
+            fetch('/calculate_2', {
+                method: 'POST',
+                body: new FormData(this)
+            })
+            .then(response => response.json())
+            .then(data => {
+                let resultDiv = document.getElementById('results');
+                if (data.error) {
+                    resultDiv.innerHTML = '<p>' + data.error + '</p>';
+                } else {
+                    resultDiv.innerHTML = `
+                        <p>Vapour Pressure of Ice: ${data.vapour_pressure_ice} Pa</p>
+                        <p>Efficiency: ${data.efficiency_percentage} %</p>
+                    `;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        };
+    </script>
+</body>
+</html>

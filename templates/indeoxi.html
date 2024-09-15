@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freeze Drying Calculator</title>
+    <style>
+        body {
+            background-image: url('https://cdn11.bigcommerce.com/s-ay2mt0vs/images/stencil/original/carousel/155/banner__72643.jpg?c=2&imbypass=on');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #0d1194;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: slideDown 1s ease-out;
+        }
+        h2 {
+            color: rgb(9, 31, 131);
+            font-size: 24px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+        form {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-section {
+            width: 45%;
+        }
+        h3, h5 {
+            color: rgb(9, 31, 131);
+            font-weight: normal;
+            margin-bottom: 10px;
+            animation: fadeInUp 1.2s ease-in;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            background: #fff;
+            color: #333;
+            font-size: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        input[type="number"]:focus {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+            border-color: #3fa1ff;
+        }
+        /* Button styling */
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        input[type="submit"], .next-button {
+            padding: 12px;
+            background-color: #413bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 120px;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+            text-align: center;
+        }
+        input[type="submit"]:hover, .next-button:hover {
+            background-color: #8cfbff;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .results {
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        .results.show {
+            opacity: 1;
+            transform: translateY(-20px);
+        }
+        .result-item {
+            margin: 10px 0;
+            color: rgb(9, 31, 131);
+            font-size: 16px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+        .result-item span {
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-30px); }
+            to { transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>ICE MAKE REFRIGERATION LIMITED</h2>
+        <h4>Freeze Drying calculation-1</h4>
+        <form id="calculateForm">
+            <div class="form-section">
+                
+                <h5>Enter the thickness in mm:</h5>
+                <input type="number" name="value1" placeholder="Thickness (mm)" step="any" required>
+                <h5>Enter the initial moisture level content:</h5>
+                <input type="number" name="value2" placeholder="Initial Moisture" step="any" required>
+                <h5>Enter the final moisture level content:</h5>
+                <input type="number" name="value3" placeholder="Final Moisture" step="any" required>
+                <h5>Enter density of the frozen material (kg/m^3):</h5>
+                <input type="number" name="value4" placeholder="Density (kg/m^3)" step="any" required>
+                <h5>Enter latent heat of sublimation (kJ/kg):</h5>
+                <input type="number" name="value5" placeholder="Latent Heat (kJ/kg)" step="any" required>
+            </div>
+            <div class="form-section">
+                <h5>Enter heat input temperature (°C):</h5>
+                <input type="number" name="value6" placeholder="Heat Input Temperature (°C)" step="any" required>
+                <h5>Enter frozen juice temperature (°C):</h5>
+                <input type="number" name="value7" placeholder="Frozen Juice Temperature (°C)" step="any" required>
+                <h5>Enter thermal conductivity of dry layer (W/m·K):</h5>
+                <input type="number" name="value8" placeholder="Thermal Conductivity (W/m·K)" step="any" required>
+                <h5>Enter pressure (Pa):</h5>
+                <input type="number" name="pressure" placeholder="Pressure (Pa)" step="any" required>
+                <h5>Enter temperature (°C):</h5>
+                <input type="number" name="temp" placeholder="Temperature (°C)" step="any" required>
+                <h5>Enter the temperature of the condenser for steady state operation (°C):</h5>
+                <input type="number" name="temperature" placeholder="Condenser Temperature (°C)" step="any" required>
+            </div>
+        </form>
+
+        <div id="results" class="results"></div>
+
+        <!-- Buttons section -->
+        <div class="buttons">
+            <input type="submit" form="calculateForm" value="Calculate">
+            <a href="/calculation2" class="next-button">Next</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calculateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+
+            fetch('/calculate', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.classList.remove('show');
+
+                setTimeout(() => {
+                    if (data.error) {
+                        resultsDiv.innerHTML = `<div class="result-item"><span>Error:</span> ${data.error}</div>`;
+                    } else {
+                        resultsDiv.innerHTML = `
+                            <div class="result-item"><span>Time (hours):</span> ${data.time_hours}</div>
+                            <div class="result-item"><span>Pressure (Pa):</span> ${data.pressure_pa}</div>
+                            <div class="result-item"><span>Vapour Pressure (Pa):</span> ${data.vapour_pressure}</div>
+                            <div class="result-item"><span>Efficiency (%):</span> ${data.efficiency}</div>`;
+                    }
+                    resultsDiv.classList.add('show');
+                }, 300); // Slight delay for smooth animation
+            })
+            .catch(error => {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = `<div class="result-item"><span>Error:</span> An unexpected error occurred</div>`;
+                resultsDiv.classList.add('show');
+            });
+        });
+    </script>
+</body>

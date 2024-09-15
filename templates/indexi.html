@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freeze Drying Calculation-2</title>
+    <style>
+        body {
+            background-image: url('https://cdn11.bigcommerce.com/s-ay2mt0vs/images/stencil/original/carousel/155/banner__72643.jpg?c=2&imbypass=on');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #fff;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* Start hidden for fade-in animation */
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: rgb(9, 31, 131);
+            animation: slideIn 1s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        h5 {
+            color: #000;
+            animation: fadeInText 1s ease-in-out;
+        }
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            color: #000;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #413bff;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #8cfbff;
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+        }
+        .results {
+            margin-top: 20px;
+            opacity: 0; /* Start hidden for fade-in animation */
+            animation: fadeIn 1s forwards;
+        }
+        .result-item {
+            margin: 10px 0;
+            color: #000;
+            animation: fadeInZoom 1s ease-out;
+        }
+        @keyframes fadeInZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .result-item span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Freeze Drying Calculation-2</h2>
+        <form id="calculateForm2">
+            <h5>Enter the saturation pressure (Pa):</h5>
+            <input type="number" name="piw" placeholder="Saturation Pressure (Pa)" step="any" required>
+            <h5>Enter the sublimation temperature (°C):</h5>
+            <input type="number" name="kl" placeholder="Sublimation Temperature (°C)" step="any" required>
+            <h5>Enter the condenser temperature (°C):</h5>
+            <input type="number" name="yi" placeholder="Condenser Temperature (°C)" step="any" required>
+            <input type="submit" value="Calculate">
+        </form>
+        <div id="results" class="results"></div>
+    </div>
+
+    <script>
+        document.getElementById('calculateForm2').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+
+            fetch('/calculate2', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('results');
+                if (data.error) {
+                    resultsDiv.innerHTML = `<div class="result-item"><span>Error:</span> ${data.error}</div>`;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="result-item"><span>Sublimation Rate:</span> ${data.sublimation_rate} Pa</div>
+                        <div class="result-item"><span>Power:</span> ${data.power_kw} kW</div>
+                        <div class="result-item"><span>Condenser Capacity:</span> ${data.condenser_capacity_l} L</div>`;
+                }
+                resultsDiv.style.opacity = 0; // Start hidden for fade-in animation
+                setTimeout(() => {
+                    resultsDiv.style.opacity = 1; // Fade-in effect
+                }, 100);
+            })
+            .catch(error => {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = `<div class="result-item"><span>Error:</span> An unexpected error occurred</div>`;
+                resultsDiv.style.opacity = 0; // Start hidden for fade-in animation
+                setTimeout(() => {
+                    resultsDiv.style.opacity = 1; // Fade-in effect
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation Results</title>
+    <style>
+        body {
+            background-image: url('https://cdn11.bigcommerce.com/s-ay2mt0vs/images/stencil/original/carousel/155/banner__72643.jpg?c=2&imbypass=on');
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        input[type="submit"], .next-button {
+            padding: 10px 20px;
+            background-color: #413bff;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover, .next-button:hover {
+            background-color: #8cfbff;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: rgb(9, 31, 131);
+        }
+        .result-item {
+            margin: 10px 0;
+        }
+        .result-item span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculation Results</h2>
+        <div class="result-item"><span>Time (hours):</span> {{ time_hours }}</div>
+        <div class="result-item"><span>Pressure (Pa):</span> {{ pressure_pa }}</div>
+        <div class="result-item"><span>Vapour Pressure (Pa):</span> {{ vapour_pressure }}</div>
+        <div class="result-item"><span>Efficiency (%):</span> {{ efficiency }}</div>
+        <h5>    </h5>
+        <a href="indeoxi.html" class="next-button">Go Back</a>
+        <h1>    </h1>
+        <a href="indexi.html" class="next-button">Freeze drying calculation-2</a>
+
+    </div>
+</body>
+</html>

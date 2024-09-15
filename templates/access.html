@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Key</title>
+    <style>
+        body {
+            background-image: url('https://cdn11.bigcommerce.com/s-ay2mt0vs/images/stencil/original/carousel/155/banner__72643.jpg?c=2&imbypass=on'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+        h2 {
+            color: #3134ed;
+            font-size: 24px;
+            margin-bottom: 20px;
+            animation: slideIn 1s ease-out;
+        }
+        input[type="text"] {
+            padding: 12px;
+            margin: 10px 0;
+            width: calc(100% - 24px);
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-out;
+        }
+        input[type="text"]:focus {
+            border-color: #3134ed;
+            box-shadow: 0 0 8px rgba(49, 52, 237, 0.5);
+        }
+        input[type="submit"] {
+            padding: 12px 20px;
+            background-color: #3134ed;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeInUp 1.5s ease-out;
+        }
+        input[type="submit"]:hover {
+            background-color: #8cfbff;
+            transform: translateY(-3px);
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); }
+            to { transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Access Key</h2>
+        <form action="/validate_key" method="POST">
+            <input type="text" name="access" placeholder="Access Key" required>
+            <input type="submit" value="Submit">
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
